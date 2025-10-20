@@ -3,3 +3,4 @@ token.json
 output/data.json
 ArkMailer.log
 get-pip.py
+tokendir.json
