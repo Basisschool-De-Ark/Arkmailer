@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArkMailer Log Viewer</title>
+    
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <style>
+        /* ... (Styling blijft hetzelfde) ... */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        #header {
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        #logo {
+            height: 50px; 
+            width: auto;
+            margin-right: 15px;
+        }
+        h1 {
+            color: #007bff;
+            margin: 0;
+            font-size: 2em;
+        }
+        #controls {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            display: flex; 
+            flex-wrap: wrap; 
+            align-items: center;
+        }
+        #controls label, #controls select, #controls input {
+            margin-right: 20px;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        #logContainer {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            min-height: 50px;
+        }
+        .log-line {
+            padding: 4px 0;
+            border-bottom: 1px dotted #eee;
+            white-space: pre-wrap;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+        /* Kleurcodering op basis van logniveau */
+        .INFO { color: #007bff; }
+        .WARNING { color: #ffc107; background-color: #fffbe6; font-weight: bold; }
+        .ERROR { color: #dc3545; background-color: #f8d7da; font-weight: bold; }
+        .CRITICAL { color: #6f42c1; background-color: #e5ccff; font-weight: bold; }
+        .DEBUG { color: #6c757d; }
+    </style>
+</head>
+<body>
+
+    <div id="header">
+        <img id="logo" src="logo.png" alt="Bedrijfslogo">
+        <h1>ArkMailer Log Viewer</h1>
+    </div>
+
+    <div id="controls">
+        <button onclick="runSync()" 
+                style="background-color: #28a745; color: white; border: none; padding: 8px 15px; cursor: pointer; border-radius: 4px; font-weight: bold; margin-right: 20px;"
+                id="runButton">
+            ▶️ Start Sync
+        </button>
+        
+        <div id="refreshStatus" style="display: none; margin-right: 20px; padding: 5px; background-color: #fff; border: 1px solid #ccc; border-radius: 4px;">
+            <span id="refreshTimer">Automatische herlading gestart...</span>
+            <button onclick="stopAutoRefresh()" style="margin-left: 10px; background-color: #dc3545; color: white; border: none; padding: 4px 8px; cursor: pointer; border-radius: 4px;">Stop</button>
+        </div>
+        
+        <label for="filterDate">Datum Kiezen:</label>
+        <input type="date" id="filterDate" onchange="filterLogs()">
+        
+        <label for="filterLevel">Log Niveau:</label>
+        <select id="filterLevel" onchange="filterLogs()">
+            <option value="">Alles Weergeven</option>
+            <option value="INFO">INFO</option>
+            <option value="WARNING">WARNING</option>
+            <option value="ERROR">ERROR</option>
+            <option value="CRITICAL">CRITICAL</option>
+        </select>
+        
+        <label for="search">Zoeken:</label>
+        <input type="text" id="search" onkeyup="filterLogs()" placeholder="Zoek op foutmelding...">
+        
+        <p id="lineCount" style="display: inline-block; margin-left: 20px; color: #555;">Totaal regels: 0</p>
+    </div>
+
+    <div id="logContainer">
+        Laden van het logbestand...
+    </div>
+
+    <script>
+        const LOG_FILE = 'ArkMailer.log';
+        let allLogLines = []; 
+        let refreshIntervalId; 
+        const REFRESH_TIME = 5000; // Herlaad om de 5 seconden (pas aan indien nodig)
+
+        // --- CORE FUNCTIES ---
+
+        // Functie om de datumkiezer in te stellen op de datum van vandaag (YYYY-MM-DD)
+        function initDateInput() {
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0'); 
+            const dd = String(today.getDate()).padStart(2, '0');
+            
+            const formattedDate = `${yyyy}-${mm}-${dd}`;
+            document.getElementById('filterDate').value = formattedDate;
+        }
+
+        // Logs laden met een cache-buster (Harde Refresh)
+        function loadLogs() {
+            initDateInput();
+            
+            const container = document.getElementById('logContainer');
+            
+            // 🚀 CACHE-BUSTER: Voegt een unieke tijdstempel toe om de browser te forceren
+            // de nieuwste versie van het logbestand te downloaden (harde refresh).
+            const cacheBuster = `?v=${new Date().getTime()}`; 
+
+            fetch(LOG_FILE + cacheBuster) 
+                .then(response => {
+                    if (!response.ok) throw new Error(`Status: ${response.status}`);
+                    return response.text();
+                })
+                .then(text => {
+                    allLogLines = text.trim().split('\n').filter(line => line.trim() !== ''); 
+                    
+                    // 🔄 DRAAI DE ARRAY OM: Nieuwste logs bovenaan
+                    allLogLines.reverse();
+                    
+                    document.getElementById('lineCount').textContent = `Totaal regels: ${allLogLines.length}`;
+                    
+                    filterLogs(); 
+                })
+                .catch(error => {
+                    container.innerHTML = `<p style="color: red;">❌ FOUT: Kan '${LOG_FILE}' niet laden. Zorg ervoor dat het bestand bestaat en Apache actief is.</p><p style="color: #555;">Details: ${error.message}</p>`;
+                });
+        }
+
+        // Logs weergeven op de pagina
+        function displayLogs(lines) {
+            const container = document.getElementById('logContainer');
+            container.innerHTML = ''; 
+
+            if (lines.length === 0) {
+                container.innerHTML = '<p>Geen loglijnen gevonden voor deze selectie.</p>';
+                return;
+            }
+
+            lines.forEach(line => {
+                const logElement = document.createElement('div');
+                logElement.className = 'log-line';
+                logElement.textContent = line;
+                
+                const levelMatch = line.match(/\s-\s(INFO|WARNING|ERROR|CRITICAL|DEBUG)\s-/i);
+                if (levelMatch && levelMatch[1]) {
+                    logElement.classList.add(levelMatch[1].toUpperCase());
+                }
+
+                container.appendChild(logElement);
+            });
+        }
+
+        // Filter logs op niveau, zoekterm én DATUM
+        function filterLogs() {
+            const dateFilter = document.getElementById('filterDate').value; 
+            const levelFilter = document.getElementById('filterLevel').value.toUpperCase();
+            const searchTerm = document.getElementById('search').value.toLowerCase();
+            
+            const filteredLines = allLogLines.filter(line => {
+                const logDateMatch = line.match(/^(\d{4}-\d{2}-\d{2})/);
+                const logDate = logDateMatch ? logDateMatch[1] : null;
+
+                const datePass = !dateFilter || (logDate && logDate === dateFilter);
+
+                const levelMatch = line.match(/\s-\s(INFO|WARNING|ERROR|CRITICAL|DEBUG)\s-/i);
+                const lineLevel = levelMatch && levelMatch[1] ? levelMatch[1].toUpperCase() : 'UNKNOWN';
+                const levelPass = !levelFilter || levelFilter === lineLevel;
+                
+                const searchPass = !searchTerm || line.toLowerCase().includes(searchTerm);
+                
+                return datePass && levelPass && searchPass;
+            });
+            
+            displayLogs(filteredLines);
+            document.getElementById('lineCount').textContent = `Totaal regels: ${filteredLines.length} (gefilterd)`;
+        }
+
+        // --- AUTOREFRESH LOGICA ---
+
+        // Functie om de synchronisatie te starten (via de PHP knop)
+        function runSync() {
+            // Dit is de enige actie van de knop
+            window.location.href = 'run_script.php';
+        }
+
+        // Start de automatische herlading van de logs
+        function startAutoRefresh() {
+            document.getElementById('refreshStatus').style.display = 'inline-block';
+            document.getElementById('runButton').disabled = true; // Schakel de knop uit tijdens de run
+            
+            let timer = REFRESH_TIME / 1000;
+            
+            // Toon de afteltimer
+            const updateTimer = () => {
+                document.getElementById('refreshTimer').textContent = `Herlaadt over ${timer}s...`;
+                timer--;
+                if (timer < 0) {
+                    timer = REFRESH_TIME / 1000;
+                    loadLogs(); // Herlaad de logs
+                }
+            };
+            
+            // Start de interval
+            updateTimer(); // Eerste update direct
+            refreshIntervalId = setInterval(updateTimer, 1000); 
+        }
+
+        // Stop de automatische herlading
+        function stopAutoRefresh() {
+            clearInterval(refreshIntervalId);
+            document.getElementById('refreshStatus').style.display = 'none';
+            document.getElementById('runButton').disabled = false; // Schakel de knop weer in
+            console.log("Automatische herlading gestopt.");
+        }
+        
+        // --- PAGINA INITIALISATIE ---
+
+        // Deze initialisatie wordt uitgevoerd zodra de pagina laadt
+        loadLogs();
+
+        // Controleer op de status=started parameter in de URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('status') === 'started') {
+            // Verwijder de status parameter om te voorkomen dat de pagina herlaadt na een handmatige refresh
+            history.replaceState(null, '', window.location.pathname);
+            
+            // Start de automatische herlading
+            startAutoRefresh();
+        }
+    </script>
+    
+</body>
+</html>
