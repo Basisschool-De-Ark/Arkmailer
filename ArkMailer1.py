@@ -470,6 +470,7 @@ def main():
     deleted_addresses = {}
     
     try:
+        logging.info("Start synchronisatie proces...")
         service = create_directory_service()
         data = load_json_data()
         
@@ -484,11 +485,21 @@ def main():
             )
             
         send_email_report(added_addresses, deleted_addresses, foute_mailadressen)
+        logging.info("Synchronisatie succesvol voltooid.")
 
     except Exception as e:
         logging.critical(f"Onverwachte fout in main(): {e}")
         print(f"❌ Onverwachte fout: {e}")
-        
+        logging.error(f"Fout tijdens synchronisatie: {e}")
+    finally:
+        # Dit blok wordt ALTIJD uitgevoerd (succes of fout)
+        flag_file = 'sync_is_running.flag'
+        if os.path.exists(flag_file):
+            os.remove(flag_file)
+            logging.info("Vlagbestand verwijderd, volgende run toegestaan.")
+        else:
+            logging.warning("Vlagbestand niet gevonden om te verwijderen.")
+            
     end_time = time.time()
     elapsed_time = end_time - start_time
     delta_time = timedelta(seconds=elapsed_time)
@@ -498,7 +509,7 @@ def main():
 
     logging.info(f"Script execution time: {hours} hours, {minutes} minutes, {seconds} seconds")
     current_time_end = datetime.now().strftime('%d-%m-%Y %H:%M:%S')
-    logging.info(f"Script ended on: {current_time_end}")
+    logging.info(f"Script ended on: {current_time_end}")   
 
 if __name__ == "__main__":
     main()

@@ -3,28 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArkMailer Log Viewer</title>
-    <link rel="icon" href="favicon.jpg" type="image/x-icon">
-    <link rel="stylesheet" href="log_viewer.css">
+    <title>ArkMailer Log Viewer - Drag & Drop</title>
+    
+    <link rel="icon" href="../favicon.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="log_viewer_drag_drop.css">
+    
+    
 </head>
-<body>
+<body id="logBody">
 
     <div id="header">
-        <img id="logo" src="logo.png" alt="Bedrijfslogo">
+        <img id="logo" src="../logo.png" alt="Bedrijfslogo">
         <h1>ArkMailer Log Viewer</h1>
     </div>
 
     <div id="controls">
-        <button onclick="runSync()" 
-                id="runButton">
-            ▶️ Start Sync
-        </button>
-        
-        <div id="refreshStatus">
-            <span id="refreshTimer">Automatische herlading gestart...</span>
-            <button onclick="stopAutoRefresh()" class="btnstoprefresh">Stop</button>
-        </div>
-        
         <label for="filterDate">Datum Kiezen:</label>
         <input type="date" id="filterDate" onchange="filterLogs()">
         
@@ -40,14 +33,23 @@
         <label for="search">Zoeken:</label>
         <input type="text" id="search" onkeyup="filterLogs()" placeholder="Zoek op foutmelding...">
         
-        <p id="lineCount" >Totaal regels: 0</p>
+        <p id="lineCount" style="display: inline-block; margin-left: 20px; color: #555;">Totaal regels: 0</p>
     </div>
 
-    <div id="logContainer">
-        Laden van het logbestand...
+    <div id="logArea" class="log-area">
+        <div id="dropZone">
+            <p><strong>📂 Sleep hier je logbestand (.log of .txt)</strong></p>
+            <p style="font-size: 0.9em; color: #6c757d;">(of klik hier om een bestand te selecteren)</p>
+            <input type="file" id="fileInput" accept=".log,.txt" style="display: none;">
+        </div>
+        
+        <div id="logContainer">
+            </div>
     </div>
-<footer> <img src="footer.png" alt="Bedrijfsfooter Afbeelding"> </footer>
-    <script src="log_viewer.js"></script>
-    
+
+    <footer>
+        <img src="../footer.png" alt="Bedrijfsfooter Afbeelding">
+    </footer>
+    <script src="log_viewer_drag_drop.js" defer></script>
 </body>
 </html>

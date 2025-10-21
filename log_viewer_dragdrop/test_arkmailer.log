@@ -1,0 +1,176 @@
+2025-10-21 09:50:01 - INFO - Systeem gestart. Versie 3.1.2 geladen.
+2025-10-21 09:50:05 - DEBUG - Databaseverbinding geopend met server: 'db_prod_01'.
+2025-10-21 09:50:15 - INFO - 500 nieuwe e-mailadressen geverifieerd en klaargezet voor synchronisatie.
+2025-10-21 09:50:45 - WARNING - API-verbinding met externe CRM is traag. Latentie: 4.5s. Herstart poging over 3 seconden.
+2025-10-21 09:51:01 - ERROR - Fout bij verwerken van gebruiker ID 1003. Emailadres 'test@foutief_adres' is ongeldig. Overslaan.
+2025-10-21 09:51:30 - INFO - Starten met verzenden van data naar Google Sheets. Batchgrootte: 500.
+2025-10-21 09:52:10 - DEBUG - Memory usage reached 85%. Triggering garbage collection.
+2025-10-20 18:30:00 - WARNING - Oude sessie ID 45F7 gevonden en automatisch opgeschoond. Controleer of de vorige run correct is afgesloten.
+2025-10-20 18:35:15 - CRITICAL - Time-out opgetreden bij het synchroniseren van grote bijlage (doc_id: 88A). De taak is abrupt gestopt. Vereist handmatige interventie.
+2025-10-21 09:53:05 - INFO - Synchronisatie voltooid. Totaal 499 records succesvol verwerkt.
+2025-10-21 09:53:10 - DEBUG - Systeem wordt afgesloten. Vlotte afsluiting geregistreerd.
+2025-10-21 09:50:01 - INFO - Systeem gestart. Versie 3.1.2 geladen.
+2025-10-21 09:50:05 - DEBUG - Databaseverbinding geopend met server: 'db_prod_01'.
+2025-10-21 09:50:15 - INFO - 500 nieuwe e-mailadressen geverifieerd en klaargezet voor synchronisatie.
+2025-10-21 09:50:45 - WARNING - API-verbinding met externe CRM is traag. Latentie: 4.5s. Herstart poging over 3 seconden.
+2025-10-21 09:51:01 - ERROR - Fout bij verwerken van gebruiker ID 1003. Emailadres 'test@foutief_adres' is ongeldig. Overslaan.
+2025-10-21 09:51:30 - INFO - Starten met verzenden van data naar Google Sheets. Batchgrootte: 500.
+2025-10-21 09:52:10 - DEBUG - Memory usage reached 85%. Triggering garbage collection.
+2025-10-20 18:30:00 - WARNING - Oude sessie ID 45F7 gevonden en automatisch opgeschoond. Controleer of de vorige run correct is afgesloten.
+2025-10-20 18:35:15 - CRITICAL - Time-out opgetreden bij het synchroniseren van grote bijlage (doc_id: 88A). De taak is abrupt gestopt. Vereist handmatige interventie.
+2025-10-21 09:53:05 - INFO - Synchronisatie voltooid. Totaal 499 records succesvol verwerkt.
+2025-10-21 09:53:10 - DEBUG - Systeem wordt afgesloten. Vlotte afsluiting geregistreerd.
+2025-10-21 09:50:01 - INFO - Systeem gestart. Versie 3.1.2 geladen.
+2025-10-21 09:50:05 - DEBUG - Databaseverbinding geopend met server: 'db_prod_01'.
+2025-10-21 09:50:15 - INFO - 500 nieuwe e-mailadressen geverifieerd en klaargezet voor synchronisatie.
+2025-10-21 09:50:45 - WARNING - API-verbinding met externe CRM is traag. Latentie: 4.5s. Herstart poging over 3 seconden.
+2025-10-21 09:51:01 - ERROR - Fout bij verwerken van gebruiker ID 1003. Emailadres 'test@foutief_adres' is ongeldig. Overslaan.
+2025-10-21 09:51:30 - INFO - Starten met verzenden van data naar Google Sheets. Batchgrootte: 500.
+2025-10-21 09:52:10 - DEBUG - Memory usage reached 85%. Triggering garbage collection.
+2025-10-20 18:30:00 - WARNING - Oude sessie ID 45F7 gevonden en automatisch opgeschoond. Controleer of de vorige run correct is afgesloten.
+2025-10-20 18:35:15 - CRITICAL - Time-out opgetreden bij het synchroniseren van grote bijlage (doc_id: 88A). De taak is abrupt gestopt. Vereist handmatige interventie.
+2025-10-21 09:53:05 - INFO - Synchronisatie voltooid. Totaal 499 records succesvol verwerkt.
+2025-10-21 09:53:10 - DEBUG - Systeem wordt afgesloten. Vlotte afsluiting geregistreerd.
+2025-10-21 09:50:01 - INFO - Systeem gestart. Versie 3.1.2 geladen.
+2025-10-21 09:50:05 - DEBUG - Databaseverbinding geopend met server: 'db_prod_01'.
+2025-10-21 09:50:15 - INFO - 500 nieuwe e-mailadressen geverifieerd en klaargezet voor synchronisatie.
+2025-10-21 09:50:45 - WARNING - API-verbinding met externe CRM is traag. Latentie: 4.5s. Herstart poging over 3 seconden.
+2025-10-21 09:51:01 - ERROR - Fout bij verwerken van gebruiker ID 1003. Emailadres 'test@foutief_adres' is ongeldig. Overslaan.
+2025-10-21 09:51:30 - INFO - Starten met verzenden van data naar Google Sheets. Batchgrootte: 500.
+2025-10-21 09:52:10 - DEBUG - Memory usage reached 85%. Triggering garbage collection.
+2025-10-20 18:30:00 - WARNING - Oude sessie ID 45F7 gevonden en automatisch opgeschoond. Controleer of de vorige run correct is afgesloten.
+2025-10-20 18:35:15 - CRITICAL - Time-out opgetreden bij het synchroniseren van grote bijlage (doc_id: 88A). De taak is abrupt gestopt. Vereist handmatige interventie.
+2025-10-21 09:53:05 - INFO - Synchronisatie voltooid. Totaal 499 records succesvol verwerkt.
+2025-10-21 09:53:10 - DEBUG - Systeem wordt afgesloten. Vlotte afsluiting geregistreerd.
+2025-10-21 09:50:01 - INFO - Systeem gestart. Versie 3.1.2 geladen.
+2025-10-21 09:50:05 - DEBUG - Databaseverbinding geopend met server: 'db_prod_01'.
+2025-10-21 09:50:15 - INFO - 500 nieuwe e-mailadressen geverifieerd en klaargezet voor synchronisatie.
+2025-10-21 09:50:45 - WARNING - API-verbinding met externe CRM is traag. Latentie: 4.5s. Herstart poging over 3 seconden.
+2025-10-21 09:51:01 - ERROR - Fout bij verwerken van gebruiker ID 1003. Emailadres 'test@foutief_adres' is ongeldig. Overslaan.
+2025-10-21 09:51:30 - INFO - Starten met verzenden van data naar Google Sheets. Batchgrootte: 500.
+2025-10-21 09:52:10 - DEBUG - Memory usage reached 85%. Triggering garbage collection.
+2025-10-20 18:30:00 - WARNING - Oude sessie ID 45F7 gevonden en automatisch opgeschoond. Controleer of de vorige run correct is afgesloten.
+2025-10-20 18:35:15 - CRITICAL - Time-out opgetreden bij het synchroniseren van grote bijlage (doc_id: 88A). De taak is abrupt gestopt. Vereist handmatige interventie.
+2025-10-21 09:53:05 - INFO - Synchronisatie voltooid. Totaal 499 records succesvol verwerkt.
+2025-10-21 09:53:10 - DEBUG - Systeem wordt afgesloten. Vlotte afsluiting geregistreerd.
+2025-10-21 09:50:01 - INFO - Systeem gestart. Versie 3.1.2 geladen.
+2025-10-21 09:50:05 - DEBUG - Databaseverbinding geopend met server: 'db_prod_01'.
+2025-10-21 09:50:15 - INFO - 500 nieuwe e-mailadressen geverifieerd en klaargezet voor synchronisatie.
+2025-10-21 09:50:45 - WARNING - API-verbinding met externe CRM is traag. Latentie: 4.5s. Herstart poging over 3 seconden.
+2025-10-21 09:51:01 - ERROR - Fout bij verwerken van gebruiker ID 1003. Emailadres 'test@foutief_adres' is ongeldig. Overslaan.
+2025-10-21 09:51:30 - INFO - Starten met verzenden van data naar Google Sheets. Batchgrootte: 500.
+2025-10-21 09:52:10 - DEBUG - Memory usage reached 85%. Triggering garbage collection.
+2025-10-20 18:30:00 - WARNING - Oude sessie ID 45F7 gevonden en automatisch opgeschoond. Controleer of de vorige run correct is afgesloten.
+2025-10-20 18:35:15 - CRITICAL - Time-out opgetreden bij het synchroniseren van grote bijlage (doc_id: 88A). De taak is abrupt gestopt. Vereist handmatige interventie.
+2025-10-21 09:53:05 - INFO - Synchronisatie voltooid. Totaal 499 records succesvol verwerkt.
+2025-10-21 09:53:10 - DEBUG - Systeem wordt afgesloten. Vlotte afsluiting geregistreerd.
+2025-10-21 09:50:01 - INFO - Systeem gestart. Versie 3.1.2 geladen.
+2025-10-21 09:50:05 - DEBUG - Databaseverbinding geopend met server: 'db_prod_01'.
+2025-10-21 09:50:15 - INFO - 500 nieuwe e-mailadressen geverifieerd en klaargezet voor synchronisatie.
+2025-10-21 09:50:45 - WARNING - API-verbinding met externe CRM is traag. Latentie: 4.5s. Herstart poging over 3 seconden.
+2025-10-21 09:51:01 - ERROR - Fout bij verwerken van gebruiker ID 1003. Emailadres 'test@foutief_adres' is ongeldig. Overslaan.
+2025-10-21 09:51:30 - INFO - Starten met verzenden van data naar Google Sheets. Batchgrootte: 500.
+2025-10-21 09:52:10 - DEBUG - Memory usage reached 85%. Triggering garbage collection.
+2025-10-20 18:30:00 - WARNING - Oude sessie ID 45F7 gevonden en automatisch opgeschoond. Controleer of de vorige run correct is afgesloten.
+2025-10-20 18:35:15 - CRITICAL - Time-out opgetreden bij het synchroniseren van grote bijlage (doc_id: 88A). De taak is abrupt gestopt. Vereist handmatige interventie.
+2025-10-21 09:53:05 - INFO - Synchronisatie voltooid. Totaal 499 records succesvol verwerkt.
+2025-10-21 09:53:10 - DEBUG - Systeem wordt afgesloten. Vlotte afsluiting geregistreerd.
+2025-10-21 09:50:01 - INFO - Systeem gestart. Versie 3.1.2 geladen.
+2025-10-21 09:50:05 - DEBUG - Databaseverbinding geopend met server: 'db_prod_01'.
+2025-10-21 09:50:15 - INFO - 500 nieuwe e-mailadressen geverifieerd en klaargezet voor synchronisatie.
+2025-10-21 09:50:45 - WARNING - API-verbinding met externe CRM is traag. Latentie: 4.5s. Herstart poging over 3 seconden.
+2025-10-21 09:51:01 - ERROR - Fout bij verwerken van gebruiker ID 1003. Emailadres 'test@foutief_adres' is ongeldig. Overslaan.
+2025-10-21 09:51:30 - INFO - Starten met verzenden van data naar Google Sheets. Batchgrootte: 500.
+2025-10-21 09:52:10 - DEBUG - Memory usage reached 85%. Triggering garbage collection.
+2025-10-20 18:30:00 - WARNING - Oude sessie ID 45F7 gevonden en automatisch opgeschoond. Controleer of de vorige run correct is afgesloten.
+2025-10-20 18:35:15 - CRITICAL - Time-out opgetreden bij het synchroniseren van grote bijlage (doc_id: 88A). De taak is abrupt gestopt. Vereist handmatige interventie.
+2025-10-21 09:53:05 - INFO - Synchronisatie voltooid. Totaal 499 records succesvol verwerkt.
+2025-10-21 09:53:10 - DEBUG - Systeem wordt afgesloten. Vlotte afsluiting geregistreerd.
+2025-10-21 09:50:01 - INFO - Systeem gestart. Versie 3.1.2 geladen.
+2025-10-21 09:50:05 - DEBUG - Databaseverbinding geopend met server: 'db_prod_01'.
+2025-10-21 09:50:15 - INFO - 500 nieuwe e-mailadressen geverifieerd en klaargezet voor synchronisatie.
+2025-10-21 09:50:45 - WARNING - API-verbinding met externe CRM is traag. Latentie: 4.5s. Herstart poging over 3 seconden.
+2025-10-21 09:51:01 - ERROR - Fout bij verwerken van gebruiker ID 1003. Emailadres 'test@foutief_adres' is ongeldig. Overslaan.
+2025-10-21 09:51:30 - INFO - Starten met verzenden van data naar Google Sheets. Batchgrootte: 500.
+2025-10-21 09:52:10 - DEBUG - Memory usage reached 85%. Triggering garbage collection.
+2025-10-20 18:30:00 - WARNING - Oude sessie ID 45F7 gevonden en automatisch opgeschoond. Controleer of de vorige run correct is afgesloten.
+2025-10-20 18:35:15 - CRITICAL - Time-out opgetreden bij het synchroniseren van grote bijlage (doc_id: 88A). De taak is abrupt gestopt. Vereist handmatige interventie.
+2025-10-21 09:53:05 - INFO - Synchronisatie voltooid. Totaal 499 records succesvol verwerkt.
+2025-10-21 09:53:10 - DEBUG - Systeem wordt afgesloten. Vlotte afsluiting geregistreerd.
+2025-10-21 09:50:01 - INFO - Systeem gestart. Versie 3.1.2 geladen.
+2025-10-21 09:50:05 - DEBUG - Databaseverbinding geopend met server: 'db_prod_01'.
+2025-10-21 09:50:15 - INFO - 500 nieuwe e-mailadressen geverifieerd en klaargezet voor synchronisatie.
+2025-10-21 09:50:45 - WARNING - API-verbinding met externe CRM is traag. Latentie: 4.5s. Herstart poging over 3 seconden.
+2025-10-21 09:51:01 - ERROR - Fout bij verwerken van gebruiker ID 1003. Emailadres 'test@foutief_adres' is ongeldig. Overslaan.
+2025-10-21 09:51:30 - INFO - Starten met verzenden van data naar Google Sheets. Batchgrootte: 500.
+2025-10-21 09:52:10 - DEBUG - Memory usage reached 85%. Triggering garbage collection.
+2025-10-20 18:30:00 - WARNING - Oude sessie ID 45F7 gevonden en automatisch opgeschoond. Controleer of de vorige run correct is afgesloten.
+2025-10-20 18:35:15 - CRITICAL - Time-out opgetreden bij het synchroniseren van grote bijlage (doc_id: 88A). De taak is abrupt gestopt. Vereist handmatige interventie.
+2025-10-21 09:53:05 - INFO - Synchronisatie voltooid. Totaal 499 records succesvol verwerkt.
+2025-10-21 09:53:10 - DEBUG - Systeem wordt afgesloten. Vlotte afsluiting geregistreerd.
+2025-10-21 09:50:01 - INFO - Systeem gestart. Versie 3.1.2 geladen.
+2025-10-21 09:50:05 - DEBUG - Databaseverbinding geopend met server: 'db_prod_01'.
+2025-10-21 09:50:15 - INFO - 500 nieuwe e-mailadressen geverifieerd en klaargezet voor synchronisatie.
+2025-10-21 09:50:45 - WARNING - API-verbinding met externe CRM is traag. Latentie: 4.5s. Herstart poging over 3 seconden.
+2025-10-21 09:51:01 - ERROR - Fout bij verwerken van gebruiker ID 1003. Emailadres 'test@foutief_adres' is ongeldig. Overslaan.
+2025-10-21 09:51:30 - INFO - Starten met verzenden van data naar Google Sheets. Batchgrootte: 500.
+2025-10-21 09:52:10 - DEBUG - Memory usage reached 85%. Triggering garbage collection.
+2025-10-20 18:30:00 - WARNING - Oude sessie ID 45F7 gevonden en automatisch opgeschoond. Controleer of de vorige run correct is afgesloten.
+2025-10-20 18:35:15 - CRITICAL - Time-out opgetreden bij het synchroniseren van grote bijlage (doc_id: 88A). De taak is abrupt gestopt. Vereist handmatige interventie.
+2025-10-21 09:53:05 - INFO - Synchronisatie voltooid. Totaal 499 records succesvol verwerkt.
+2025-10-21 09:53:10 - DEBUG - Systeem wordt afgesloten. Vlotte afsluiting geregistreerd.
+2025-10-21 09:50:01 - INFO - Systeem gestart. Versie 3.1.2 geladen.
+2025-10-21 09:50:05 - DEBUG - Databaseverbinding geopend met server: 'db_prod_01'.
+2025-10-21 09:50:15 - INFO - 500 nieuwe e-mailadressen geverifieerd en klaargezet voor synchronisatie.
+2025-10-21 09:50:45 - WARNING - API-verbinding met externe CRM is traag. Latentie: 4.5s. Herstart poging over 3 seconden.
+2025-10-21 09:51:01 - ERROR - Fout bij verwerken van gebruiker ID 1003. Emailadres 'test@foutief_adres' is ongeldig. Overslaan.
+2025-10-21 09:51:30 - INFO - Starten met verzenden van data naar Google Sheets. Batchgrootte: 500.
+2025-10-21 09:52:10 - DEBUG - Memory usage reached 85%. Triggering garbage collection.
+2025-10-20 18:30:00 - WARNING - Oude sessie ID 45F7 gevonden en automatisch opgeschoond. Controleer of de vorige run correct is afgesloten.
+2025-10-20 18:35:15 - CRITICAL - Time-out opgetreden bij het synchroniseren van grote bijlage (doc_id: 88A). De taak is abrupt gestopt. Vereist handmatige interventie.
+2025-10-21 09:53:05 - INFO - Synchronisatie voltooid. Totaal 499 records succesvol verwerkt.
+2025-10-21 09:53:10 - DEBUG - Systeem wordt afgesloten. Vlotte afsluiting geregistreerd.
+2025-10-21 09:50:01 - INFO - Systeem gestart. Versie 3.1.2 geladen.
+2025-10-21 09:50:05 - DEBUG - Databaseverbinding geopend met server: 'db_prod_01'.
+2025-10-21 09:50:15 - INFO - 500 nieuwe e-mailadressen geverifieerd en klaargezet voor synchronisatie.
+2025-10-21 09:50:45 - WARNING - API-verbinding met externe CRM is traag. Latentie: 4.5s. Herstart poging over 3 seconden.
+2025-10-21 09:51:01 - ERROR - Fout bij verwerken van gebruiker ID 1003. Emailadres 'test@foutief_adres' is ongeldig. Overslaan.
+2025-10-21 09:51:30 - INFO - Starten met verzenden van data naar Google Sheets. Batchgrootte: 500.
+2025-10-21 09:52:10 - DEBUG - Memory usage reached 85%. Triggering garbage collection.
+2025-10-20 18:30:00 - WARNING - Oude sessie ID 45F7 gevonden en automatisch opgeschoond. Controleer of de vorige run correct is afgesloten.
+2025-10-20 18:35:15 - CRITICAL - Time-out opgetreden bij het synchroniseren van grote bijlage (doc_id: 88A). De taak is abrupt gestopt. Vereist handmatige interventie.
+2025-10-21 09:53:05 - INFO - Synchronisatie voltooid. Totaal 499 records succesvol verwerkt.
+2025-10-21 09:53:10 - DEBUG - Systeem wordt afgesloten. Vlotte afsluiting geregistreerd.
+2025-10-21 09:50:01 - INFO - Systeem gestart. Versie 3.1.2 geladen.
+2025-10-21 09:50:05 - DEBUG - Databaseverbinding geopend met server: 'db_prod_01'.
+2025-10-21 09:50:15 - INFO - 500 nieuwe e-mailadressen geverifieerd en klaargezet voor synchronisatie.
+2025-10-21 09:50:45 - WARNING - API-verbinding met externe CRM is traag. Latentie: 4.5s. Herstart poging over 3 seconden.
+2025-10-21 09:51:01 - ERROR - Fout bij verwerken van gebruiker ID 1003. Emailadres 'test@foutief_adres' is ongeldig. Overslaan.
+2025-10-21 09:51:30 - INFO - Starten met verzenden van data naar Google Sheets. Batchgrootte: 500.
+2025-10-21 09:52:10 - DEBUG - Memory usage reached 85%. Triggering garbage collection.
+2025-10-20 18:30:00 - WARNING - Oude sessie ID 45F7 gevonden en automatisch opgeschoond. Controleer of de vorige run correct is afgesloten.
+2025-10-20 18:35:15 - CRITICAL - Time-out opgetreden bij het synchroniseren van grote bijlage (doc_id: 88A). De taak is abrupt gestopt. Vereist handmatige interventie.
+2025-10-21 09:53:05 - INFO - Synchronisatie voltooid. Totaal 499 records succesvol verwerkt.
+2025-10-21 09:53:10 - DEBUG - Systeem wordt afgesloten. Vlotte afsluiting geregistreerd.
+2025-10-21 09:50:01 - INFO - Systeem gestart. Versie 3.1.2 geladen.
+2025-10-21 09:50:05 - DEBUG - Databaseverbinding geopend met server: 'db_prod_01'.
+2025-10-21 09:50:15 - INFO - 500 nieuwe e-mailadressen geverifieerd en klaargezet voor synchronisatie.
+2025-10-21 09:50:45 - WARNING - API-verbinding met externe CRM is traag. Latentie: 4.5s. Herstart poging over 3 seconden.
+2025-10-21 09:51:01 - ERROR - Fout bij verwerken van gebruiker ID 1003. Emailadres 'test@foutief_adres' is ongeldig. Overslaan.
+2025-10-21 09:51:30 - INFO - Starten met verzenden van data naar Google Sheets. Batchgrootte: 500.
+2025-10-21 09:52:10 - DEBUG - Memory usage reached 85%. Triggering garbage collection.
+2025-10-20 18:30:00 - WARNING - Oude sessie ID 45F7 gevonden en automatisch opgeschoond. Controleer of de vorige run correct is afgesloten.
+2025-10-20 18:35:15 - CRITICAL - Time-out opgetreden bij het synchroniseren van grote bijlage (doc_id: 88A). De taak is abrupt gestopt. Vereist handmatige interventie.
+2025-10-21 09:53:05 - INFO - Synchronisatie voltooid. Totaal 499 records succesvol verwerkt.
+2025-10-21 09:53:10 - DEBUG - Systeem wordt afgesloten. Vlotte afsluiting geregistreerd.
+2025-10-21 09:50:01 - INFO - Systeem gestart. Versie 3.1.2 geladen.
+2025-10-21 09:50:05 - DEBUG - Databaseverbinding geopend met server: 'db_prod_01'.
+2025-10-21 09:50:15 - INFO - 500 nieuwe e-mailadressen geverifieerd en klaargezet voor synchronisatie.
+2025-10-21 09:50:45 - WARNING - API-verbinding met externe CRM is traag. Latentie: 4.5s. Herstart poging over 3 seconden.
+2025-10-21 09:51:01 - ERROR - Fout bij verwerken van gebruiker ID 1003. Emailadres 'test@foutief_adres' is ongeldig. Overslaan.
+2025-10-21 09:51:30 - INFO - Starten met verzenden van data naar Google Sheets. Batchgrootte: 500.
+2025-10-21 09:52:10 - DEBUG - Memory usage reached 85%. Triggering garbage collection.
+2025-10-20 18:30:00 - WARNING - Oude sessie ID 45F7 gevonden en automatisch opgeschoond. Controleer of de vorige run correct is afgesloten.
+2025-10-20 18:35:15 - CRITICAL - Time-out opgetreden bij het synchroniseren van grote bijlage (doc_id: 88A). De taak is abrupt gestopt. Vereist handmatige interventie.
+2025-10-21 09:53:05 - INFO - Synchronisatie voltooid. Totaal 499 records succesvol verwerkt.
+2025-10-21 09:53:10 - DEBUG - Systeem wordt afgesloten. Vlotte afsluiting geregistreerd.

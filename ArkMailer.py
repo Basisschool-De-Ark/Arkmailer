@@ -1,3 +1,5 @@
+#DO NOT USE THIS CODE THIS IS AN OLD CODE. 
+# PLEASE USE THE NEW VERSION OF THE CODE IN ARKMAILER1.PY
 from dotenv import load_dotenv
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
