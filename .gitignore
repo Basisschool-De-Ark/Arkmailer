@@ -4,3 +4,4 @@ output/data.json
 ArkMailer.log
 get-pip.py
 tokendir.json
+sync_execution_debug.log

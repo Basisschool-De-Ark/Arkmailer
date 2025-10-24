@@ -1,7 +1,8 @@
 const LOG_FILE = 'ArkMailer.log';
 let allLogLines = []; 
-let refreshIntervalId = null; // Zorg dat deze initieel null is
-const REFRESH_TIME = 5000; // Herlaad om de 5 seconden (pas aan indien nodig)
+let refreshIntervalId = null; 
+const REFRESH_TIME = 5000; // Herlaad om de 5 seconden
+const STATUS_CHECK_TIME = 5000; // Statuscheck om de 5 seconden (verhoogd voor stabiliteit)
 
 // --- CORE FUNCTIES ---
 
@@ -14,7 +15,6 @@ function initDateInput() {
     
     const formattedDate = `${yyyy}-${mm}-${dd}`;
     
-    // Alleen instellen als er geen waarde is, om filteren niet te verstoren
     if (!document.getElementById('filterDate').value) {
         document.getElementById('filterDate').value = formattedDate;
     }
@@ -25,8 +25,6 @@ function loadLogs() {
     initDateInput();
     
     const container = document.getElementById('logContainer');
-    
-    // 🚀 CACHE-BUSTER: Voegt een unieke tijdstempel toe om de browser te forceren
     const cacheBuster = `?v=${new Date().getTime()}`; 
 
     fetch(LOG_FILE + cacheBuster) 
@@ -37,7 +35,7 @@ function loadLogs() {
         .then(text => {
             allLogLines = text.trim().split('\n').filter(line => line.trim() !== ''); 
             
-            // 🔄 DRAAI DE ARRAY OM: Nieuwste logs bovenaan
+            // DRAAI DE ARRAY OM: Nieuwste logs bovenaan
             allLogLines.reverse();
             
             document.getElementById('lineCount').textContent = `Totaal regels: ${allLogLines.length}`;
@@ -75,7 +73,6 @@ function displayLogs(lines) {
 
 // Filter logs op niveau, zoekterm én DATUM
 function filterLogs() {
-    // Alleen filteren als er logs zijn geladen
     if (allLogLines.length === 0) return;
     
     const dateFilter = document.getElementById('filterDate').value; 
@@ -103,9 +100,38 @@ function filterLogs() {
 
 // --- AUTOREFRESH & STATUS LOGICA ---
 
+// NIEUWE FUNCTIE: Start de synchronisatie via fetch om browser redirects te voorkomen
+function startSynchronization() {
+    const runButton = document.getElementById('runButton');
+
+    // Voorkom dubbelklikken onmiddellijk en toon 'opstarten'
+    runButton.disabled = true;
+    runButton.textContent = '🔄 Bezig met opstarten...'; 
+    runButton.style.backgroundColor = '#ffc107'; 
+    runButton.style.color = '#333';
+    
+    // Roep run_script.php aan zonder de pagina te verlaten
+    fetch('run_script.php')
+        .then(response => {
+            if (!response.ok) {
+                // Als de PHP server een foutcode teruggeeft (bv. 500)
+                throw new Error(`Serverfout bij opstarten: ${response.status}`);
+            }
+            // De PHP-opstart was succesvol (HTTP 200), nu status checken
+            checkSyncStatus(); 
+            //alert('✅ Synchronisatie is succesvol opgestart. Volg de voortgang hier.');
+        })
+        .catch(error => {
+            alert('❌ Fout bij het starten van de synchronisatie: ' + error.message);
+            // Herstel de knopstatus in geval van fout
+            checkSyncStatus(); 
+        });
+}
+
+
 // Start de automatische herlading van de logs
 function startAutoRefresh() {
-    if (refreshIntervalId) return; // Voorkom dubbele intervallen
+    if (refreshIntervalId) return; 
     
     document.getElementById('refreshStatus').style.display = 'inline-block';
     document.getElementById('runButton').disabled = true; 
@@ -121,7 +147,7 @@ function startAutoRefresh() {
         }
     };
     
-    updateTimer(); // Eerste update direct
+    updateTimer(); 
     refreshIntervalId = setInterval(updateTimer, 1000); 
 }
 
@@ -131,16 +157,15 @@ function stopAutoRefresh() {
         clearInterval(refreshIntervalId);
         refreshIntervalId = null;
         document.getElementById('refreshStatus').style.display = 'none';
-        // Knop wordt geactiveerd door checkSyncStatus()
         console.log("Automatische herlading gestopt.");
     }
 }
 
-// Functie om de status van het vlagbestand te controleren
+// Functie om de status van het vlagbestand te controleren (voor de knop)
 function checkSyncStatus() {
     const runButton = document.getElementById('runButton');
     
-    // Gebruik een cache-buster om ervoor te zorgen dat we de meest recente status krijgen
+    // Gebruik een cache-buster en de verhoogde status check tijd
     const cacheBuster = `?v=${new Date().getTime()}`; 
 
     fetch('check_sync_status.php' + cacheBuster)
@@ -153,7 +178,7 @@ function checkSyncStatus() {
                 // HET SCRIPT IS BEZIG
                 runButton.disabled = true;
                 runButton.textContent = '🔄 Sync Loopt...';
-                runButton.style.backgroundColor = '#ffc107'; // Oranje
+                runButton.style.backgroundColor = '#ffc107'; 
                 runButton.style.color = '#333';
                 
                 if (!refreshIntervalId) { 
@@ -163,7 +188,7 @@ function checkSyncStatus() {
                 // HET SCRIPT IS GESTOPT
                 runButton.disabled = false;
                 runButton.textContent = '▶️ Start Sync';
-                runButton.style.backgroundColor = '#28a745'; // Groen
+                runButton.style.backgroundColor = '#28a745'; 
                 runButton.style.color = 'white';
                 
                 if (refreshIntervalId) { 
@@ -174,7 +199,8 @@ function checkSyncStatus() {
         })
         .catch(error => {
             console.error("Fout bij controleren sync status:", error);
-            // Optioneel: toon een fout op de pagina als de statuscheck faalt
+            // Zorg ervoor dat de knop in ieder geval aanklikbaar blijft als de check faalt
+            runButton.disabled = false;
         });
 }
 
@@ -183,19 +209,15 @@ function checkSyncStatus() {
 // 1. Laad de logs bij de start
 loadLogs();
 
-// 2. Start de statuscheck interval (om de 2 seconden)
+// 2. Start de statuscheck interval
 checkSyncStatus();
-setInterval(checkSyncStatus, 2000); 
+setInterval(checkSyncStatus, STATUS_CHECK_TIME); 
 
-// 3. Controleer de URL parameters voor de initiële status (na knopklik)
+// 3. Controleer de URL parameters voor de initiële status (oude redirects, nu vervangen door alerts)
 const urlParams = new URLSearchParams(window.location.search);
 const status = urlParams.get('status');
 
-// Toon een melding na de klik
-if (status === 'started') {
+// Verwijder de oude status parameters uit de URL (omdat we nu alerts gebruiken)
+if (status === 'started' || status === 'running') {
     history.replaceState(null, '', window.location.pathname);
-    alert('✅ Synchronisatie is succesvol opgestart. Volg de voortgang hier.');
-} else if (status === 'running') {
-    history.replaceState(null, '', window.location.pathname);
-    alert('⚠️ Let op: De synchronisatie loopt al. De knop is uitgeschakeld totdat het proces is voltooid.');
 }

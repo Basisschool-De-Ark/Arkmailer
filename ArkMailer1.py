@@ -492,24 +492,16 @@ def main():
         print(f"❌ Onverwachte fout: {e}")
         logging.error(f"Fout tijdens synchronisatie: {e}")
     finally:
-        # Dit blok wordt ALTIJD uitgevoerd (succes of fout)
-        flag_file = 'sync_is_running.flag'
-        if os.path.exists(flag_file):
-            os.remove(flag_file)
-            logging.info("Vlagbestand verwijderd, volgende run toegestaan.")
-        else:
-            logging.warning("Vlagbestand niet gevonden om te verwijderen.")
-            
-    end_time = time.time()
-    elapsed_time = end_time - start_time
-    delta_time = timedelta(seconds=elapsed_time)
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        delta_time = timedelta(seconds=elapsed_time)
     
-    hours, remainder = divmod(delta_time.seconds, 3600)
-    minutes, seconds = divmod(remainder, 60)
+        hours, remainder = divmod(delta_time.seconds, 3600)
+        minutes, seconds = divmod(remainder, 60)
 
-    logging.info(f"Script execution time: {hours} hours, {minutes} minutes, {seconds} seconds")
-    current_time_end = datetime.now().strftime('%d-%m-%Y %H:%M:%S')
-    logging.info(f"Script ended on: {current_time_end}")   
+        logging.info(f"Script execution time: {hours} hours, {minutes} minutes, {seconds} seconds")
+        current_time_end = datetime.now().strftime('%d-%m-%Y %H:%M:%S')
+        logging.info(f"Script ended on: {current_time_end}")   
 
 if __name__ == "__main__":
     main()
