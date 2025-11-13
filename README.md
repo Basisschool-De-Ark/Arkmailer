@@ -26,6 +26,7 @@ https://www.googleapis.com/auth/apps.groups.settings,https://www.googleapis.com/
 17. Application type: desktop app
 18. Download json and paste this line in the .env file where the credentials line has to go
 19. Make sure that your .env file is created and filled in correctly, otherwise the program is not going to work.
+20. After all instalation you can manualy run the code and view the log on the log.viewer.html page.
 
 ## Very important to check
 In the function get_google_groups you have to change the domain name of the groups you do not want to compare to the directory json file, otherwise the script is going to remove all the members from the groups it cannot find in the directory json file.
