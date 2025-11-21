@@ -258,7 +258,7 @@ def add_member_to_group(service, group_email: str, member_email: str, wrong_mail
     try:
         service.members().insert(groupKey=group_email, body={"email": member_email, "role": "MEMBER"}).execute()
         logging.info(f"E-mailadres {member_email} toegevoegd aan groep: {group_email}")
-        print(f"✅ E-mailadres {member_email} toegevoegd aan groep: {group_email}")
+        print(f" E-mailadres {member_email} toegevoegd aan groep: {group_email}")
         
         if group_email not in added_addresses:
             added_addresses[group_email] = set()
@@ -269,19 +269,19 @@ def add_member_to_group(service, group_email: str, member_email: str, wrong_mail
         
         if status_code == 409: # Conflict: Lid bestaat al
             logging.info(f"Lid {member_email} is reeds lid van {group_email} (409 Conflict).")
-            print(f"➡️ Lid {member_email} is reeds lid van {group_email}.")
+            print(f" Lid {member_email} is reeds lid van {group_email}.")
         elif status_code == 404: # Not Found: Geen geldig Google-account
             if group_email not in wrong_mails:
                 wrong_mails[group_email] = set()
             wrong_mails[group_email].add(member_email)
             logging.warning(f"Ongeldig account: {member_email} in {group_email} (404 Not Found).")
-            print(f"⚠️ Ongeldig account: {member_email} in {group_email}.")
+            print(f" Ongeldig account: {member_email} in {group_email}.")
         else:
             logging.error(f"Fout bij het toevoegen van {member_email} aan {group_email} ({status_code}): {e}")
-            print(f"❌ Fout bij toevoegen {member_email} aan {group_email} ({status_code}): {e}")
+            print(f" Fout bij toevoegen {member_email} aan {group_email} ({status_code}): {e}")
     except Exception as e:
         logging.critical(f"Kritieke fout bij toevoegen lid {member_email}: {e}")
-        print(f"❌ Kritieke fout bij toevoegen lid {member_email}: {e}")
+        print(f" Kritieke fout bij toevoegen lid {member_email}: {e}")
 
 
 def remove_member_from_group(service, group_email: str, member_email: str, deleted_addresses: Dict):
@@ -289,7 +289,7 @@ def remove_member_from_group(service, group_email: str, member_email: str, delet
     try:
         service.members().delete(groupKey=group_email, memberKey=member_email).execute()
         logging.info(f"E-mailadres {member_email} verwijderd uit groep: {group_email}")
-        print(f"🗑️ E-mailadres {member_email} verwijderd uit groep: {group_email}")
+        print(f" E-mailadres {member_email} verwijderd uit groep: {group_email}")
 
         if group_email not in deleted_addresses:
             deleted_addresses[group_email] = set()
@@ -300,10 +300,10 @@ def remove_member_from_group(service, group_email: str, member_email: str, delet
             logging.info(f"Lid {member_email} was al verwijderd of niet gevonden in {group_email} (404 Not Found).")
         else:
             logging.error(f"Fout bij het verwijderen van {member_email} uit {group_email}: {e}")
-            print(f"❌ Fout bij verwijderen {member_email} uit {group_email}: {e}")
+            print(f" Fout bij verwijderen {member_email} uit {group_email}: {e}")
     except Exception as e:
         logging.critical(f"Kritieke fout bij verwijderen lid {member_email}: {e}")
-        print(f"❌ Kritieke fout bij verwijderen lid {member_email}: {e}")
+        print(f" Kritieke fout bij verwijderen lid {member_email}: {e}")
 
 
 def ensure_group_exists(service, email: str, name: str, description: str):
@@ -327,11 +327,11 @@ def ensure_group_exists(service, email: str, name: str, description: str):
                 return True
             except HttpError as creation_error:
                 logging.error(f"FATALE FOUT bij het aanmaken van de groep: {creation_error}")
-                print(f"❌ FATALE FOUT bij het aanmaken van de groep: {creation_error}")
+                print(f" FATALE FOUT bij het aanmaken van de groep: {creation_error}")
                 return False
         
         logging.error(f"FATALE FOUT bij controleren/aanmaken van groep: {e}")
-        print(f"❌ FATALE FOUT bij controleren/aanmaken van groep: {e}")
+        print(f" FATALE FOUT bij controleren/aanmaken van groep: {e}")
         return False
 
 
@@ -451,10 +451,10 @@ def send_email_report(added_addresses: Dict, deleted_addresses: Dict, wrong_addr
     try:
         sent_message = service.users().messages().send(userId='me', body={'raw': raw_message}).execute()
         logging.info(f"E-mailrapport succesvol verstuurd. Message Id: {sent_message.get('id')}")
-        print(f"\n✅ E-mailrapport verstuurd.")
+        print(f"\n E-mailrapport verstuurd.")
     except Exception as error:
         logging.error(f"Fout bij het versturen van het e-mailrapport: {error}")
-        print(f"\n❌ Fout bij het versturen van het e-mailrapport: {error}")
+        print(f"\n Fout bij het versturen van het e-mailrapport: {error}")
         
     logging.info(full_message_body)
 
@@ -489,7 +489,7 @@ def main():
 
     except Exception as e:
         logging.critical(f"Onverwachte fout in main(): {e}")
-        print(f"❌ Onverwachte fout: {e}")
+        print(f" Onverwachte fout: {e}")
         logging.error(f"Fout tijdens synchronisatie: {e}")
     finally:
         end_time = time.time()
