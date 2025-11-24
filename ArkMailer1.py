@@ -396,7 +396,8 @@ def compare_and_sync_maps(directory_map: Dict[str, Set[str]], google_group_map: 
             add_member_to_group(service, groepsadres, mailadres_to_add, wrong_mails, added_addresses)
             
         logging.info(f"Synchronisatie voltooid voor groep: {groepsadres}")
-
+        # 🚨 CRUCIALE WIJZIGING: Voeg een korte vertraging toe om Rate Limiting te voorkomen
+        time.sleep(1) # Wacht 1 seconde tussen de verwerking van elke groep
     return wrong_mails, added_addresses, deleted_addresses
 
 
