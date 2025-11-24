@@ -562,7 +562,7 @@ def main():
 
         logging.info(f"Script execution time: {hours} hours, {minutes} minutes, {seconds} seconds")
         current_time_end = datetime.now().strftime('%d-%m-%Y %H:%M:%S')
-        logging.info(f"Script ended on: {current_time_end}")   
+        logging.info(f"Script ended on: {current_time_end}")
 
 if __name__ == "__main__":
     main()
