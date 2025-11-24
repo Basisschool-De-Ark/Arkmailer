@@ -6,4 +6,5 @@ get-pip.py
 tokendir.json
 sync_execution_debug.log
 tokenmail.json
-ArkMailer/
+/Arkmailer
+/vendor
