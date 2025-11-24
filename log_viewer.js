@@ -221,3 +221,23 @@ const status = urlParams.get('status');
 if (status === 'started' || status === 'running') {
     history.replaceState(null, '', window.location.pathname);
 }
+
+// --- Settings modaal venster ---
+var modal = document.getElementById("configModal");
+
+    // Functie om de modal te openen
+    function openModal() {
+        modal.style.display = "block";
+    }
+
+    // Functie om de modal te sluiten
+    function closeModal() {
+        modal.style.display = "none";
+    }
+
+    // Sluit de modal als de gebruiker buiten het venster klikt
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
