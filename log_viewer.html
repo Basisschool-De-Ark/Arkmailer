@@ -51,10 +51,39 @@
                  <h2>⚙️ Systeeminstellingen Bewerken</h2>
 
                <!-- <form method="POST" action="save_config.php">
-                    <label for="PYTHON_EXECUTABLE">Python Exe Pad:</label>
-                    <input type="text" name="PYTHON_EXECUTABLE" value="" placeholder="<?= getenv('PYTHON_EXECUTABLE') ?? 'Pad niet gevonden' ?>"><br>
-            
-                    <button type="submit">Instellingen Opslaan</button>
+                    <h3>⚙️ Algemene Instellingen</h3>
+                        <label for="PYTHON_EXECUTABLE">Python Exe Pad (.exe):</label>
+                        <input type="text" name="PYTHON_EXECUTABLE" value="<?= getenv('PYTHON_EXECUTABLE') ?>" required><br>
+
+                        <label for="PYTHON_SCRIPT_PATH">Sync Script Pad (.py):</label>
+                        <input type="text" name="PYTHON_SCRIPT_PATH" value="<?= getenv('PYTHON_SCRIPT_PATH') ?>" required><br>
+    
+                        <label for="DOMAIN_NAME">Google Workspace Domein:</label>
+                        <input type="text" name="DOMAIN_NAME" value="<?= getenv('DOMAIN_NAME') ?>" required><br>
+
+    
+                    <hr>
+                    <h3>🔑 WISA Credentials</h3>
+                        <label for="USERNAME_ENV">WISA Gebruikersnaam:</label>
+                        <input type="text" name="USERNAME_ENV" value="<?= getenv('USERNAME_ENV') ?>" required><br>
+    
+                        <label for="PASSWORD_ENV">WISA Wachtwoord:</label>
+                        <input type="password" name="PASSWORD_ENV" placeholder="Alleen invullen bij wijziging"><br>
+    
+    
+                    <hr>
+                    <h3>📧 Gmail Rapportage Instellingen</h3>
+                        <label for="SENDER_EMAIL_LOGIN">Afzender E-mail (Sync Account):</label>
+                        <input type="email" name="SENDER_EMAIL_LOGIN" value="<?= getenv('SENDER_EMAIL_LOGIN') ?>" required><br>
+
+                        <label for="RECEIVER_EMAIL">Ontvanger E-mail (Rapport):</label>
+                        <input type="email" name="RECEIVER_EMAIL" value="<?= getenv('RECEIVER_EMAIL') ?>" required><br>
+
+                        <label for="CREDENTIALS_MAIL">Gmail Credentials (JSON):</label>
+                        <textarea name="CREDENTIALS_MAIL" rows="4" placeholder="Volledige, ge-escapede JSON string..."><?= getenv('CREDENTIALS_MAIL') ?></textarea><br>
+
+                    <br>
+                    <button type="submit">💾 Instellingen Opslaan en Bijwerken</button>
                 </form>-->
         </div>
 </div>
