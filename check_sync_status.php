@@ -2,7 +2,7 @@
 // check_sync_status.php - Controleert de laatste wijzigingstijd van het logbestand
 
 $log_file = 'ArkMailer.log'; // Zorg dat dit de correcte naam is!
-$max_seconds_idle = 30;      // Maximale tijd (in seconden) dat het logbestand mag stilstaan (Pas aan als de sync langer duurt zonder te loggen)
+$max_seconds_idle = 15;      // Maximale tijd (in seconden) dat het logbestand mag stilstaan (Pas aan als de sync langer duurt zonder te loggen)
 
 $status = [
     'isRunning' => false

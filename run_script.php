@@ -1,9 +1,9 @@
 <?php
 // run_script.php - Voorkomt dubbele uitvoeringen en logt de uitvoeringsfout
 
-$debug_log_file = 'sync_execution_debug.log'; // Nieuw bestand voor foutmeldingen
-$python_exe = 'C:\Users\De Ark\AppData\Local\Python\pythoncore-3.14-64\python.exe'; 
-$python_script = 'C:\Users\De Ark\Documents\Arkmailer\arkmailer-main\ArkMailer1.py';
+$debug_log_file =__DIR__ . 'sync_execution_debug.log'; // Nieuw bestand voor foutmeldingen
+$python_exe =__DIR__ . '/venv/Scripts/python.exe';; 
+$python_script = __DIR__ . '/ArkMailer1.py';
 $log_viewer_url = 'log_viewer.html'; // Zorg dat dit de correcte HTML bestandsnaam is
 
 // Maak een robuust commando dat de uitvoer naar een debug log stuurt.

@@ -1,0 +1,16 @@
+# Externe bibliotheken vereist door de import-instructies in ArkMailer1.py
+
+# Voor het laden van de .env bestanden
+python-dotenv
+
+# Voor HTTP-verzoeken naar de WISA API
+requests
+
+# Voor interactie met de Google Directory API en Gmail API
+google-api-python-client
+
+# Voor de OAuth 2.0 flow (inclusief het maken en verversen van de tokenbestanden)
+google-auth-oauthlib
+
+# Voor het veilig afhandelen van tokens en Google-verzoeken
+google-auth
