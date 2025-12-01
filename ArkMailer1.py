@@ -16,6 +16,7 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from googleapiclient.errors import HttpError
 from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 # --- LOGGING & INIT ---
 # Gebruik van UTF-8 codering voor de logfile om tekens en speciale symbolen correct te ondersteunen.
@@ -445,63 +446,40 @@ def compare_and_sync_maps(directory_map: Dict[str, Set[str]], google_group_map: 
     return wrong_mails, added_addresses, deleted_addresses
 
 
-# --- E-MAIL RAPPORTAGE FUNCTIE ---
+# --- E-MAIL RAPPORTAGE FUNCTIE (HTML HERWERKT) ---
 def send_email_report(added_addresses: Dict, deleted_addresses: Dict, wrong_addresses: Dict):
-    """Verstuurt een samenvattend e-mailrapport via de Gmail API."""
+    """Verstuurt een samenvattend HTML e-mailrapport via de Gmail API."""
     service = create_gmail_service()
     
-    # FIX: Als de service niet gecreëerd kon worden (lege credentials), stop.
+    # Check op service
     if service is None:
-        logging.warning("E-mailrapport niet verstuurd: Gmail Service kon niet worden gecreëerd (Credentials/Scopes missen).")
+        logging.warning("E-mailrapport niet verstuurd: Gmail Service kon niet worden gecreëerd.")
         print(" E-mailrapport niet verstuurd (credentials ontbreken).")
         return 
 
-    # Opbouw van het rapportbericht... (ongewijzigd)
-    message_parts = []
+    # 1. Genereer de HTML body die overeenkomt met de afbeelding
+    html_body = generate_report_html(added_addresses, deleted_addresses, wrong_addresses, SENDER_EMAIL)
     
-    if added_addresses:
-        message_parts.append("\n--- Adressen Toegevoegd ---")
-        for group_email, members in added_addresses.items():
-            message_parts.append(f"\nToegevoegd aan groep {group_email}:")
-            for member in members:
-                message_parts.append(f"- {member}")
-    else:
-        message_parts.append("\n--- Geen Adressen Toegevoegd ---")
-
-    if deleted_addresses:
-        message_parts.append("\n--- Adressen Verwijderd ---")
-        for group_email, members in deleted_addresses.items():
-            message_parts.append(f"\nVerwijderd uit groep {group_email}:")
-            for member in members:
-                message_parts.append(f"- {member}")
-    else:
-        message_parts.append("\n--- Geen Adressen Verwijderd ---")
-
-    if wrong_addresses:
-        message_parts.append("\n--- FOUTIEVE/NIET-Bestaande Adressen ---")
-        for group_email, members in wrong_addresses.items():
-            message_parts.append(f"\nFout opgetreden in groep {group_email}:")
-            for member in members:
-                message_parts.append(f"- {member} (Niet toegevoegd/Bestaat niet)")
-    else:
-        message_parts.append("\n--- Geen Foutieve Adressen Gevonden ---")
-
-    full_message_body = "\n".join(message_parts)
-    
-    # Stel het e-mailbericht in
-    msg = MIMEText(full_message_body)
+    # 2. Stel het MIME-bericht in als MIMEMultipart
+    msg = MIMEMultipart('alternative')
     current_date = datetime.now().strftime("%d/%m/%Y")
-    msg['Subject'] = f'Arkmailer Sync Report - {current_date}'
+    
+    msg['Subject'] = f'Arkmailer - Rapport {current_date}'
+    
+    # 3. Voeg de HTML-versie toe aan het bericht
+    html_part = MIMEText(html_body, 'html')
+    msg.attach(html_part)
 
+    # 4. Check op afzender/ontvanger
     if not SENDER_EMAIL or not RECEIVER_EMAIL:
-         logging.warning("E-mailrapport niet verstuurd: SENDER_EMAIL of RECEIVER_EMAIL ontbreken in .env.")
-         print(" E-mailrapport niet verstuurd (sender/receiver ontbreken).")
-         return
+        logging.warning("E-mailrapport niet verstuurd: SENDER_EMAIL of RECEIVER_EMAIL ontbreken in .env.")
+        print(" E-mailrapport niet verstuurd (sender/receiver ontbreken).")
+        return
 
     msg['From'] = SENDER_EMAIL
     msg['To'] = RECEIVER_EMAIL
 
-    # Encodeer en verstuur het bericht
+    # 5. Encodeer en verstuur het bericht
     raw_message = base64.urlsafe_b64encode(msg.as_bytes()).decode('utf-8')
 
     try:
@@ -512,8 +490,103 @@ def send_email_report(added_addresses: Dict, deleted_addresses: Dict, wrong_addr
         logging.error(f"Fout bij het versturen van het e-mailrapport: {error}")
         print(f"\n Fout bij het versturen van het e-mailrapport: {error}")
         
-    logging.info(full_message_body)
+    # Log de platte tekst versie van de inhoud voor debuggen
+    logging.info("HTML Rapport Inhoud: \n" + html_body)
 
+
+# --- NIEUWE FUNCTIE: HTML GENERATIE ---
+def generate_report_html(added_addresses: Dict, deleted_addresses: Dict, wrong_addresses: Dict, contact_email: str) -> str:
+    """Genereert de volledige HTML body voor het e-mailrapport."""
+    
+    # Functie om de inhoud van de blokken te genereren
+    def generate_content_html(addresses: Dict):
+        content_html = ""
+        for group_email, members in addresses.items():
+            content_html += f"<p style='margin: 0; padding-bottom: 5px; font-weight: bold;'>Toegevoegd aan groep {group_email}:</p>"
+            content_html += "<ul style='list-style-type: none; padding: 0; margin-top: 0;'>"
+            for member in members:
+                content_html += f"<li>- <span style='color: white; text-decoration: none;'>{member}</span></li>"
+            content_html += "</ul>"
+        return content_html
+
+    # Functie om de afzonderlijke gekleurde blokken te maken
+    def create_report_block(title: str, addresses: Dict, is_added: bool = False, is_error: bool = False):
+        if is_error:
+            # Rood voor fouten/verwijderde/niet-gevonden
+            bg_color = '#dc3545'
+            content_text = 'Geen Foutieve Adressen Gevonden' if not addresses else ''
+        elif is_added:
+            # Groen voor toegevoegde
+            bg_color = '#28a745'
+            content_text = 'Geen Adressen Toegevoegd' if not addresses else ''
+        else:
+            # Rood voor verwijderde
+            bg_color = '#dc3545'
+            content_text = 'Geen Adressen Verwijderd' if not addresses else ''
+            
+        content_html = generate_content_html(addresses) if addresses else (
+             f"<p style='margin: 0; text-align: center;'>{content_text}</p>"
+        )
+
+        # De rode en groene blokken met afgeronde hoeken
+        block = f"""
+        <div style="background-color: {bg_color}; color: white; border-radius: 10px; padding: 15px; margin-bottom: 20px;">
+            <h3 style="text-align: center; margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.5); padding-bottom: 5px;">
+                {title}
+            </h3>
+            <div style="font-size: 14px; line-height: 1.5;">
+                {content_html}
+            </div>
+        </div>
+        """
+        return block
+
+    # Bouw alle blokken op
+    added_block = create_report_block("Adressen Toegevoegd", added_addresses, is_added=True)
+    deleted_block = create_report_block("Adressen Verwijderd", deleted_addresses, is_added=False)
+
+    # De 'Foutieve Adressen' block gebruikt een iets andere logica voor de titel
+    wrong_block_content = {}
+    if wrong_addresses:
+        # Als er foutieve adressen zijn, gebruik dan de bestaande structuur voor de content
+        wrong_block_content = wrong_addresses
+        
+    wrong_block = create_report_block("Foutieve Adressen", wrong_block_content, is_error=True)
+
+    # De HTML-template
+    current_date_str = datetime.now()
+    
+    html = f"""
+    <html>
+    <head>
+        <style>
+            body {{ font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }}
+            .container {{ max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }}
+            .header {{ background-color: #000; color: white; padding: 15px 20px; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; align-items: center; }}
+            .logo-text {{ font-size: 24px; font-weight: bold; margin: 0; }}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1 class="logo-text" style="color: white; margin: 0;">Arkmailer - Rapport</h1>
+                <span style="font-size: 14px; color: #ccc;">{current_date_str}</span>
+            </div>
+
+            <div style="padding: 20px 0;">
+                {added_block}
+                {deleted_block}
+                {wrong_block}
+            </div>
+
+            <div style="font-size: 14px; margin-top: 25px; text-align: right; color: #555;">
+                Contact: <a href="mailto:{contact_email}" style="color: #555; text-decoration: none;">{contact_email}</a>
+            </div>
+        </div>
+    </body>
+    </html>
+    """
+    return html
 
 # --- MAIN SCRIPT EXECUTION ---
 def main():
