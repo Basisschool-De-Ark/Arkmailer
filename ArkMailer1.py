@@ -83,6 +83,7 @@ def get_wisa_reference_date() -> str:
     else:
         # Trek 14 dagen af in alle andere maanden.
         ref_date = today - timedelta(days=14)
+        #ref_date = today.replace(day=30, month=1)
         
     return ref_date.strftime("%d/%m/%Y")
 
