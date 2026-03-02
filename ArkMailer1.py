@@ -81,7 +81,7 @@ def get_wisa_reference_date() -> str:
         # Als het augustus is, gebruik 2 september (begin nieuw schooljaar)
         ref_date = today.replace(day=2, month=9)
     else:
-        # Trek 14 dagen af in alle andere maanden.
+        # tel 14 dagen bij in alle andere maanden.
         ref_date = today + timedelta(days=14)
         #ref_date = today.replace(day=1, month=3)
         
